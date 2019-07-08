@@ -14,11 +14,26 @@ class L2ViewController: BaseViewController {
     private var VBO: GLuint = 0
 
     // 顶点数组
-    private let vertices: [L2Vertex] = [
-        L2Vertex(position: (0, 0.5, 0)),
-        L2Vertex(position: (-0.5, -0.5, 0)),
-        L2Vertex(position: (0.5, -0.5, 0))
-    ]
+private let vertices: [L2Vertex] = [
+    L2Vertex(position: (0, 0.7, 0)), // 点
+
+    L2Vertex(position: (-1, 0.5, 0)), // 线
+    L2Vertex(position: (1, 0.5, 0)), // 线
+
+    // 三角形
+    L2Vertex(position: (0, 0.5, 0)),
+    L2Vertex(position: (-0.5, -0.5, 0)),
+    L2Vertex(position: (0.5, -0.5, 0)),
+
+    // 长方形
+    L2Vertex(position: (0.5, -0.6, 0)),
+    L2Vertex(position: (0.5, -0.8, 0)),
+    L2Vertex(position: (-0.5, -0.6, 0)),
+
+    L2Vertex(position: (0.5, -0.8, 0)),
+    L2Vertex(position: (-0.5, -0.6, 0)),
+    L2Vertex(position: (-0.5, -0.8, 0)),
+]
 
     private let effect: GLKBaseEffect = GLKBaseEffect()
 
@@ -30,17 +45,25 @@ class L2ViewController: BaseViewController {
     }
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glClearColor(1, 0, 0, 1)
+        glClearColor(0, 0, 0, 1)
         glClear(GLenum(GL_COLOR_BUFFER_BIT))
 
         // 调用执行的着色器
         effect.prepareToDraw()
 
+        // 其实主要在
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), VBO)
+
         // 绘制所需要的物体
         // 第一个参数是: 绘制的图元类型
         // 第二个参数是: 顶点数组的起始索引
         // 第三个参数是：打算绘制的顶点个数
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(vertices.count))
+        glDrawArrays(GLenum(GL_POINTS), 0, 1)
+        glDrawArrays(GLenum(GL_LINES), 1, 2)
+        glDrawArrays(GLenum(GL_TRIANGLES), 3, 3)
+
+        // 绘制长方形
+        glDrawArrays(GLenum(GL_TRIANGLES), 6, 6)
     }
 }
 
@@ -51,6 +74,10 @@ private extension L2ViewController {
 
         // 将上面生成的缓存区对象设置为当前缓冲区对象
         // 提示: OpenGL 自身就是一个状态机
+        // GL_ARRAY_BUFFER 指顶点数组缓冲区对象
+        // GL_ELEMENT_ARRAY_BUFFER 指索引缓冲区对象
+        // 目前我们先使用 GL_ARRAY_BUFFER。
+        // 后面会当顶点出现重复后，我们会使用 GL_ELEMENT_ARRAY_BUFFER 来减少顶点数据传输量。
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), VBO)
 
         // 为缓冲区申请内存空间，并进行初始化
