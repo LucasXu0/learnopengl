@@ -10,21 +10,16 @@ import GLKit
 
 class L1ViewController: GLKViewController {
 
-    override func loadView() {
-        // 1. 设置当前的 View 为 GLKView
-        self.view = GLKView()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 2. 设置当前 OpenGL 上下文运行的版本，这里选择的是 OpenGLES 2。
+        // 1. 设置当前 OpenGL 上下文运行的版本，这里选择的是 OpenGLES 2。
         // 至于 OpenGLES 123 之间的区别，可以自行 google。
         (self.view as! GLKView).context = EAGLContext(api: .openGLES2)!
     }
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        // 3. 渲染我们想要的画面
+        // 2. 渲染我们想要的画面
         let randomColor = self.randomColor()
 
         // glClearColor 的命名可能会让人有点误解，实际上它的作用是设置背景颜色，并不是clear(清除)颜色。
