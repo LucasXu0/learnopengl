@@ -8,32 +8,32 @@
 import UIKit
 import GLKit
 
-class L2ViewController: BaseViewController {
+class L2_1ViewController: BaseViewController {
 
     // vertex buffer object
     private var VBO: GLuint = 0
 
     // 顶点数组
-private let vertices: [L2Vertex] = [
-    L2Vertex(position: (0, 0.7, 0)), // 点
+    private let vertices: [L2Vertex] = [
+        L2Vertex(position: (0, 0.7, 0)), // 点
 
-    L2Vertex(position: (-1, 0.5, 0)), // 线
-    L2Vertex(position: (1, 0.5, 0)), // 线
+        L2Vertex(position: (-1, 0.5, 0)), // 线
+        L2Vertex(position: (1, 0.5, 0)), // 线
 
-    // 三角形
-    L2Vertex(position: (0, 0.5, 0)),
-    L2Vertex(position: (-0.5, -0.5, 0)),
-    L2Vertex(position: (0.5, -0.5, 0)),
+        // 三角形
+        L2Vertex(position: (0, 0.5, 0)),
+        L2Vertex(position: (-0.5, -0.5, 0)),
+        L2Vertex(position: (0.5, -0.5, 0)),
 
-    // 长方形
-    L2Vertex(position: (0.5, -0.6, 0)),
-    L2Vertex(position: (0.5, -0.8, 0)),
-    L2Vertex(position: (-0.5, -0.6, 0)),
+        // 长方形
+        L2Vertex(position: (0.5, -0.6, 0)),
+        L2Vertex(position: (0.5, -0.8, 0)),
+        L2Vertex(position: (-0.5, -0.6, 0)),
 
-    L2Vertex(position: (0.5, -0.8, 0)),
-    L2Vertex(position: (-0.5, -0.6, 0)),
-    L2Vertex(position: (-0.5, -0.8, 0)),
-]
+        L2Vertex(position: (0.5, -0.8, 0)),
+        L2Vertex(position: (-0.5, -0.6, 0)),
+        L2Vertex(position: (-0.5, -0.8, 0)),
+    ]
 
     private let effect: GLKBaseEffect = GLKBaseEffect()
 
@@ -51,9 +51,6 @@ private let vertices: [L2Vertex] = [
         // 调用执行的着色器
         effect.prepareToDraw()
 
-        // 其实主要在
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), VBO)
-
         // 绘制所需要的物体
         // 第一个参数是: 绘制的图元类型
         // 第二个参数是: 顶点数组的起始索引
@@ -67,7 +64,7 @@ private let vertices: [L2Vertex] = [
     }
 }
 
-private extension L2ViewController {
+private extension L2_1ViewController {
     private func setupBuffer() {
         // 创建缓冲区对象
         glGenBuffers(1, &VBO)
