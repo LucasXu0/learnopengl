@@ -12,7 +12,8 @@ class MainViewController: UIViewController {
     typealias Lesson = (name: String, values: [String])
 
     private let lessons: [Lesson] = [
-        ("Lesson 1", ["Colorful GLKit"])
+        ("Lesson 1", ["Colorful GLKit"]),
+        ("Lesson 2", ["Draw A Triangle"])
     ]
 
     private lazy var tableView: UITableView = {
@@ -62,6 +63,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             if row == 0 {
                 viewController = L1ViewController()
+            }
+        } else if section == 1 {
+            if row == 0 {
+                viewController = L2ViewController()
             }
         }
 
