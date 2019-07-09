@@ -13,7 +13,8 @@ class MainViewController: UIViewController {
 
     private let lessons: [Lesson] = [
         ("Lesson 1", ["Colorful GLKit"]),
-        ("Lesson 2", ["Draw A Triangle By VBO", "Draw A Triangle By EBO", "Draw A Triangle By VAO"])
+        ("Lesson 2", ["Draw A Triangle By VBO", "Draw A Triangle By EBO", "Draw A Triangle By VAO"]),
+        ("Lesson 3", ["Custom Base Effect"])
     ]
 
     private lazy var tableView: UITableView = {
@@ -72,6 +73,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             } else if row == 2 {
                 viewController = L2_3ViewController()
             }
+        } else if section == 2 {
+            viewController = L3ViewController()
         }
 
         if let viewController = viewController {
