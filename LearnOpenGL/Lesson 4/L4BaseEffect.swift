@@ -1,14 +1,17 @@
 //
-//  File.swift
+//  L4BaseEffect.swift
 //  LearnOpenGL
 //
-//  Created by xurunkang on 2019/7/9.
+//  Created by xurunkang on 2019/7/10.
 //  
 
 import Foundation
 import GLKit
 
-class L3BaseEffect {
+class L4BaseEffect {
+
+    private var texture: GLuint?
+    private var textureUniform: Int32 = 0
 
     private var program: GLuint = 0
 
@@ -18,10 +21,35 @@ class L3BaseEffect {
 
     func prepareToDraw() {
         glUseProgram(program)
+
+        if let texture = texture {
+            glActiveTexture(GLenum(GL_TEXTURE1))
+            glBindTexture(GLenum(GL_TEXTURE_2D), texture)
+            glUniform1f(textureUniform, 1)
+        }
+    }
+
+    func setTexture(_ resource: String) {
+        texture = loadTexture(resource)
     }
 }
 
-private extension L3BaseEffect {
+private extension L4BaseEffect {
+    private func loadTexture(_ resource: String) -> GLuint? {
+        guard
+            let path = Bundle.main.path(forResource: resource, ofType: nil),
+            let info = try? GLKTextureLoader.texture(
+                withContentsOfFile: path,
+                options: [GLKTextureLoaderOriginBottomLeft: true]
+            ) else
+        {
+            print("[Load Texture Error]")
+            return nil
+        }
+
+        return info.name
+    }
+
     private func compile(_ vertexShaderName: String, _ fragmentShaderName: String) {
         guard
             let vertexShader = compileShader(vertexShaderName, with: GLenum(GL_VERTEX_SHADER)),
@@ -44,6 +72,9 @@ private extension L3BaseEffect {
 
         // 链接程序
         glLinkProgram(program)
+
+        // 查询 uniform 信息
+        textureUniform = glGetUniformLocation(program, "u_texture")
 
         var success = GLint()
 
@@ -106,3 +137,4 @@ private extension L3BaseEffect {
         return shader
     }
 }
+

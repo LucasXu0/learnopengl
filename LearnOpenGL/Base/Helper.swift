@@ -6,6 +6,7 @@
 //  
 
 import Foundation
+import GLKit
 
 extension Array {
     var elementsSize: Int {

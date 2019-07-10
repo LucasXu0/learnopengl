@@ -14,7 +14,8 @@ class MainViewController: UIViewController {
     private let lessons: [Lesson] = [
         ("Lesson 1", ["Colorful GLKit"]),
         ("Lesson 2", ["Draw A Triangle By VBO", "Draw A Triangle By EBO", "Draw A Triangle By VAO"]),
-        ("Lesson 3", ["Custom Base Effect"])
+        ("Lesson 3", ["Custom Base Effect"]),
+        ("Lesson 4", ["Draw A Picture"])
     ]
 
     private lazy var tableView: UITableView = {
@@ -56,15 +57,22 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
+        if let viewController = self.viewController(for: indexPath) {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+}
+
+private extension MainViewController {
+    private func viewController(for indexPath: IndexPath) -> UIViewController? {
+
         let section = indexPath.section
         let row = indexPath.row
 
         var viewController: UIViewController?
 
         if section == 0 {
-            if row == 0 {
-                viewController = L1ViewController()
-            }
+            viewController = L1ViewController()
         } else if section == 1 {
             if row == 0 {
                 viewController = L2_1ViewController()
@@ -75,15 +83,11 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             }
         } else if section == 2 {
             viewController = L3ViewController()
+        } else if section == 3 {
+            viewController = L4ViewController()
         }
 
-        if let viewController = viewController {
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+        return viewController
     }
-}
-
-private extension MainViewController {
-    
 }
 

@@ -1,27 +1,34 @@
 //
-//  L3ViewController.swift
+//  L4ViewController.swift
 //  LearnOpenGL
 //
-//  Created by xurunkang on 2019/7/9.
+//  Created by xurunkang on 2019/7/10.
 //  
 
 import Foundation
 import GLKit
 
-class L3ViewController: BaseViewController {
+class L4ViewController: BaseViewController {
 
     // 注意: effect 的初始化需要在设置 EAGLContext.setCurrent 后
-    private lazy var effect: L3BaseEffect = L3BaseEffect("l3vertex.vsh", "l3fragment.fsh")
+    private lazy var effect: L4BaseEffect = {
+        let effect = L4BaseEffect("l4vertex.vsh", "l4fragment.fsh")
+        effect.setTexture("L4.JPG")
+        return effect
+    }()
 
     // vertex buffer object
     private var VBO: GLuint = 0
 
     // 顶点数组
-    private let vertices: [L3Vertex] = [
-        // 三角形
-        L3Vertex(position: (0, 0.5, 0), color: (0, 0, 0, 1)),
-        L3Vertex(position: (-0.5, -0.5, 0), color: (0, 0, 0, 1)),
-        L3Vertex(position: (0.5, -0.5, 0), color: (0, 0, 0, 1))
+    private let vertices: [L4Vertex] = [
+        L4Vertex(position: (-1, -1, 0), color: (0, 0, 0, 1), texCoord: (0, 0)),
+        L4Vertex(position: (1, -1, 0), color: (0, 0, 0, 1), texCoord: (1, 0)),
+        L4Vertex(position: (1, 1, 0), color: (0, 0, 0, 1), texCoord: (1, 1)),
+
+        L4Vertex(position: (1, 1, 0), color: (0, 0, 0, 1), texCoord: (1, 1)),
+        L4Vertex(position: (-1, 1, 0), color: (0, 0, 0, 1), texCoord: (0, 1)),
+        L4Vertex(position: (-1, -1, 0), color: (0, 0, 0, 1), texCoord: (0, 0))
     ]
 
     override func viewDidLoad() {
@@ -42,7 +49,7 @@ class L3ViewController: BaseViewController {
     }
 }
 
-private extension L3ViewController {
+private extension L4ViewController {
     private func setupBuffer() {
 
         // 再次三部曲
@@ -67,7 +74,7 @@ private extension L3ViewController {
             3,
             GLenum(GL_FLOAT),
             GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<L3Vertex>.stride),
+            GLsizei(MemoryLayout<L4Vertex>.stride),
             UnsafeRawPointer(bitPattern: 0)
         )
 
@@ -79,8 +86,21 @@ private extension L3ViewController {
             4,
             GLenum(GL_FLOAT),
             GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<L3Vertex>.stride),
+            GLsizei(MemoryLayout<L4Vertex>.stride),
             UnsafeRawPointer(bitPattern: 3 * MemoryLayout<GLfloat>.size)
+        )
+
+        glEnableVertexAttribArray(VertexAttrib.textureCoordinate.rawValue)
+
+        // 传输颜色
+        glVertexAttribPointer(
+            VertexAttrib.textureCoordinate.rawValue,
+            2,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<L4Vertex>.stride),
+            UnsafeRawPointer(bitPattern: (3 + 4) * MemoryLayout<GLfloat>.size)
         )
     }
 }
+
