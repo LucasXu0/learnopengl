@@ -100,6 +100,7 @@
 		2B22E5B922D20BDE0016D666 /* LearnOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				2B9212DA22D5798E005A410A /* Base */,
 				2B7925C022D4AC9D0075AFA7 /* Lesson 3 */,
 				2B1E578C22D31683002777B3 /* Lesson 2 */,
 				2B22E5CC22D20FB30016D666 /* Lesson 1 */,
@@ -109,9 +110,6 @@
 				2B22E5C122D20BE00016D666 /* Assets.xcassets */,
 				2B22E5C322D20BE00016D666 /* LaunchScreen.storyboard */,
 				2B22E5C622D20BE00016D666 /* Info.plist */,
-				2B1E578F22D316B9002777B3 /* BaseViewController.swift */,
-				2B1E579822D3244D002777B3 /* Helper.swift */,
-				2B7925C722D4C3030075AFA7 /* Define.swift */,
 			);
 			path = LearnOpenGL;
 			sourceTree = "<group>";
@@ -141,6 +139,16 @@
 				2B7925C522D4C2CF0075AFA7 /* L3Vertex.swift */,
 			);
 			path = "Lesson 3";
+			sourceTree = "<group>";
+		};
+		2B9212DA22D5798E005A410A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2B1E578F22D316B9002777B3 /* BaseViewController.swift */,
+				2B1E579822D3244D002777B3 /* Helper.swift */,
+				2B7925C722D4C3030075AFA7 /* Define.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		710FA60A22D39A4D00B04CCA /* 2-1 Draw A Triangle */ = {
