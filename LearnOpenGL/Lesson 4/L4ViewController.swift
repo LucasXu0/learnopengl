@@ -22,13 +22,13 @@ class L4ViewController: BaseViewController {
 
     // 顶点数组
     private let vertices: [L4Vertex] = [
-        L4Vertex(position: (-1, -1, 0), color: (0, 0, 0, 1), texCoord: (0, 0)),
-        L4Vertex(position: (1, -1, 0), color: (0, 0, 0, 1), texCoord: (1, 0)),
-        L4Vertex(position: (1, 1, 0), color: (0, 0, 0, 1), texCoord: (1, 1)),
+        L4Vertex(position: (-1, -1, 0), color: (1, 0, 0, 1), texCoord: (0, 0)),
+        L4Vertex(position: (1, -1, 0), color: (0, 1, 0, 1), texCoord: (1, 0)),
+        L4Vertex(position: (1, 1, 0), color: (0, 0, 1, 1), texCoord: (1, 1)),
 
-        L4Vertex(position: (1, 1, 0), color: (0, 0, 0, 1), texCoord: (1, 1)),
-        L4Vertex(position: (-1, 1, 0), color: (0, 0, 0, 1), texCoord: (0, 1)),
-        L4Vertex(position: (-1, -1, 0), color: (0, 0, 0, 1), texCoord: (0, 0))
+        L4Vertex(position: (1, 1, 0), color: (0, 0, 1, 1), texCoord: (1, 1)),
+        L4Vertex(position: (-1, 1, 0), color: (0, 1, 0, 1), texCoord: (0, 1)),
+        L4Vertex(position: (-1, -1, 0), color: (1, 0, 0, 1), texCoord: (0, 0))
     ]
 
     override func viewDidLoad() {

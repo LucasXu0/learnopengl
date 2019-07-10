@@ -23,9 +23,13 @@ class L4BaseEffect {
         glUseProgram(program)
 
         if let texture = texture {
-            glActiveTexture(GLenum(GL_TEXTURE1))
+            // 其实 GL_TEXTURE0 是默认开启的
+            glActiveTexture(GLenum(GL_TEXTURE0))
+            // 绑定纹理
             glBindTexture(GLenum(GL_TEXTURE_2D), texture)
-            glUniform1f(textureUniform, 1)
+            // 给片段着色器采样器变量 Sample2D 赋值
+            // 其实就是告诉采样器从哪个 TEXTURE 中读取信息
+            glUniform1i(textureUniform, 0)
         }
     }
 
@@ -69,6 +73,7 @@ private extension L4BaseEffect {
         // 绑定顶点着色器的顶点属性
         glBindAttribLocation(program, VertexAttrib.position.rawValue, "a_position")
         glBindAttribLocation(program, VertexAttrib.color.rawValue, "a_color")
+        glBindAttribLocation(program, VertexAttrib.textureCoordinate.rawValue, "a_texCoord")
 
         // 链接程序
         glLinkProgram(program)
