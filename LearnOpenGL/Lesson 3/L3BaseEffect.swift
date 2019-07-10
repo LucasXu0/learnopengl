@@ -43,7 +43,7 @@ private extension L3BaseEffect {
         glAttachShader(program, vertexShader)
         glAttachShader(program, fragmentShader)
 
-        // 绑定着色器属性
+        // 绑定顶点着色器的顶点属性
         glBindAttribLocation(program, L3VertexAttrib.position.rawValue, "a_position")
         glBindAttribLocation(program, L3VertexAttrib.color.rawValue, "a_color")
 
@@ -73,22 +73,25 @@ private extension L3BaseEffect {
                 return nil
         }
 
-        // 创建着色器对象
+        // 根据传入的 type 创建着色器对象
+        // 这里的参数只能是 GL_VERTEX_SHADER 或 GL_FRAGMENT_SHADER，分别代表顶点着色器和片段着色器
         let shader = glCreateShader(type)
 
+        // 将传入的 GLSL 代码转换为 glShaderSource 能识别的参数
         let cShaderStr = shaderStr.cString(using: .utf8)
         var cShaderCount = GLint(Int32(cShaderStr!.count))
         var shaderSource = UnsafePointer<GLchar>(cShaderStr)
 
         // 关联着色器对象和着色器代码
+        // 实际上就是关于 GLSL 代码的字符串到 shader 上
         glShaderSource(
-            shader,
-            1,
-            &shaderSource,
-            &cShaderCount
+            shader, // 需要关联的 shader
+            1, // GLSL 代码字符串个数，一般就是 1 个
+            &shaderSource, // GLSL 代码字符串
+            &cShaderCount // GLSL 代码字符串长度
         )
 
-        // 编译
+        // 编译 shader
         glCompileShader(shader)
 
         var success = GLint()
