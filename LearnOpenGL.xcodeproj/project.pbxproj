@@ -19,6 +19,7 @@
 		2B22E5C222D20BE00016D666 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B22E5C122D20BE00016D666 /* Assets.xcassets */; };
 		2B22E5C522D20BE00016D666 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B22E5C322D20BE00016D666 /* LaunchScreen.storyboard */; };
 		2B22E5CE22D20FC50016D666 /* L1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B22E5CD22D20FC50016D666 /* L1ViewController.swift */; };
+		2B4104B422D59850006A10CE /* L4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2B4104B322D59850006A10CE /* L4.JPG */; };
 		2B5A3DD222D4276500849A57 /* L2_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A3DD122D4276500849A57 /* L2_3ViewController.swift */; };
 		2B7925C222D4ACBD0075AFA7 /* L3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7925C122D4ACBD0075AFA7 /* L3ViewController.swift */; };
 		2B7925C422D4AE030075AFA7 /* L3BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7925C322D4AE030075AFA7 /* L3BaseEffect.swift */; };
@@ -30,7 +31,6 @@
 		2B9212E522D57CFF005A410A /* L4BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9212E422D57CFF005A410A /* L4BaseEffect.swift */; };
 		2B9212E722D57D14005A410A /* L4Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9212E622D57D14005A410A /* L4Vertex.swift */; };
 		2B9212E922D57DAF005A410A /* VertexAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9212E822D57DAF005A410A /* VertexAttributes.swift */; };
-		2B9212F122D58BBC005A410A /* L4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2B9212F022D58BBB005A410A /* L4.JPG */; };
 		710FA60D22D39A9600B04CCA /* L2_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710FA60C22D39A9600B04CCA /* L2_2ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +49,7 @@
 		2B22E5C422D20BE00016D666 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B22E5C622D20BE00016D666 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B22E5CD22D20FC50016D666 /* L1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1ViewController.swift; sourceTree = "<group>"; };
+		2B4104B322D59850006A10CE /* L4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = L4.JPG; sourceTree = "<group>"; };
 		2B5A3DD122D4276500849A57 /* L2_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L2_3ViewController.swift; sourceTree = "<group>"; };
 		2B7925C122D4ACBD0075AFA7 /* L3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L3ViewController.swift; sourceTree = "<group>"; };
 		2B7925C322D4AE030075AFA7 /* L3BaseEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L3BaseEffect.swift; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		2B9212E422D57CFF005A410A /* L4BaseEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L4BaseEffect.swift; sourceTree = "<group>"; };
 		2B9212E622D57D14005A410A /* L4Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L4Vertex.swift; sourceTree = "<group>"; };
 		2B9212E822D57DAF005A410A /* VertexAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexAttributes.swift; sourceTree = "<group>"; };
-		2B9212F022D58BBB005A410A /* L4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = L4.JPG; path = ../../../../Downloads/L4.JPG; sourceTree = "<group>"; };
 		710FA60C22D39A9600B04CCA /* L2_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L2_2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,7 +170,7 @@
 		2B9212DB22D579B6005A410A /* Lesson 4 */ = {
 			isa = PBXGroup;
 			children = (
-				2B9212F022D58BBB005A410A /* L4.JPG */,
+				2B4104B322D59850006A10CE /* L4.JPG */,
 				2B9212DF22D57B7C005A410A /* Shader */,
 				2B9212DC22D57AC2005A410A /* L4ViewController.swift */,
 				2B9212E422D57CFF005A410A /* L4BaseEffect.swift */,
@@ -266,7 +266,7 @@
 				2B22E5C222D20BE00016D666 /* Assets.xcassets in Resources */,
 				2B1E579422D31808002777B3 /* l3vertex.vsh in Resources */,
 				2B9212E322D57B7C005A410A /* l4fragment.fsh in Resources */,
-				2B9212F122D58BBC005A410A /* L4.JPG in Resources */,
+				2B4104B422D59850006A10CE /* L4.JPG in Resources */,
 				2B1E579522D31808002777B3 /* l3fragment.fsh in Resources */,
 				2B22E5C022D20BDE0016D666 /* Main.storyboard in Resources */,
 			);

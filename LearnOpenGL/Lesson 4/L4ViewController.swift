@@ -92,7 +92,7 @@ private extension L4ViewController {
 
         glEnableVertexAttribArray(VertexAttrib.textureCoordinate.rawValue)
 
-        // 传输颜色
+        // 传输纹理坐标
         glVertexAttribPointer(
             VertexAttrib.textureCoordinate.rawValue,
             2,
