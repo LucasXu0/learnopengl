@@ -93,7 +93,7 @@ private extension L5BaseEffect {
 
         // 查询 uniform 信息
         textureUniform = glGetUniformLocation(program, "u_texture")
-
+        modelMatrixUniform = glGetUniformLocation(program, "model_matrix")
 
         var success = GLint()
 

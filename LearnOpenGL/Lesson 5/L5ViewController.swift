@@ -45,7 +45,7 @@ class L5ViewController: BaseViewController {
 
         effect.prepareToDraw()
 
-        // 变换
+        // 传入变换矩阵
         effect.modelMatrix = modelMatrix()
 
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(vertices.count))
@@ -55,18 +55,10 @@ class L5ViewController: BaseViewController {
 private extension L5ViewController {
     private func modelMatrix() -> GLKMatrix4 {
         var modelMatrix = GLKMatrix4Identity
-
-        // 平移
-        modelMatrix = GLKMatrix4Translate(modelMatrix, 0.5, -0.5, 0)
-
-        // 缩放
-        modelMatrix = GLKMatrix4Scale(modelMatrix, 0.5, 0.5, 1)
-
-        // 旋转
-        // 沿 Y 轴旋转 45°
+        modelMatrix = GLKMatrix4Translate(modelMatrix, 0.5, -0.5, 0) // 平移
+        modelMatrix = GLKMatrix4Scale(modelMatrix, 0.5, 0.5, 1) // 缩放
         let radians = linearRadians()
-        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0)
-
+        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0) // 旋转, 沿 Y 轴旋转 45°
         return modelMatrix
     }
 
