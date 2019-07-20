@@ -8,7 +8,7 @@
 import Foundation
 import GLKit
 
-private let scale = GLfloat((UIScreen.main.bounds.width / (2.0 * UIScreen.main.bounds.height)))
+private let scale = GLfloat(UIScreen.main.bounds.width / UIScreen.main.bounds.height)
 
 class L6ViewController: BaseViewController {
 
@@ -21,14 +21,74 @@ class L6ViewController: BaseViewController {
 
     // vertex buffer object
     private var VBO: GLuint = 0
+    // element buffer object
+    private var EBO: GLuint = 0
 
     // 顶点数组
     private let vertices: [L6Vertex] = [
 
-        L6Vertex(position: (-0.5, -scale, 0), color: (1, 0, 0, 1), texCoord: (0, 0)),
-        L6Vertex(position: (0.5, -scale, 0), color: (0, 1, 0, 1), texCoord: (1, 0)),
-        L6Vertex(position: (0.5, scale, 0), color: (0, 0, 1, 1), texCoord: (1, 1)),
-        L6Vertex(position: (-0.5, scale, 0), color: (0, 1, 0, 1), texCoord: (0, 1)),
+        // Front
+        L6Vertex(position: (1, -scale, 1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 0
+        L6Vertex(position: (1, scale, 1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 0
+        L6Vertex(position: (-1, scale, 1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 0
+        L6Vertex(position: (-1, -scale, 1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 0
+
+        // Back
+        L6Vertex(position: (-1, -scale, -1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 0
+        L6Vertex(position: (-1, scale, -1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 1
+        L6Vertex(position: (1, scale, -1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 2
+        L6Vertex(position: (1, -scale, -1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 3
+
+        // Left
+        L6Vertex(position: (-1, -scale, 1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 4
+        L6Vertex(position: (-1, scale, 1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 5
+        L6Vertex(position: (-1, scale, -1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 6
+        L6Vertex(position: (-1, -scale, -1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 7
+
+        // Right
+        L6Vertex(position: (1, -scale, -1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 8
+        L6Vertex(position: (1, scale, -1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 9
+        L6Vertex(position: (1, scale, 1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 10
+        L6Vertex(position: (1, -scale, 1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 11
+
+        // Top
+        L6Vertex(position: (1, scale, 1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 12
+        L6Vertex(position: (1, scale, -1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 13
+        L6Vertex(position: (-1, scale, -1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 14
+        L6Vertex(position: (-1, scale, 1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 15
+
+        // Bottom
+        L6Vertex(position: (1, -scale, -1), color: (1, 0, 0, 1), texCoord: (1, 0)), // 16
+        L6Vertex(position: (1, -scale, 1), color: (0, 1, 0, 1), texCoord: (1, 1)), // 17
+        L6Vertex(position: (-1, -scale, 1), color: (0, 0, 1, 1), texCoord: (0, 1)), // 18
+        L6Vertex(position: (-1, -scale, -1), color: (0, 0, 0, 1), texCoord: (0, 0)), // 19
+    ]
+
+    // 索引数组
+    private let indices: [GLubyte] = [
+        // Front
+        0, 1, 2,
+        2, 3, 0,
+
+        // Back
+        4, 5, 6,
+        6, 7, 4,
+
+        // Left
+        8, 9, 10,
+        10, 11, 8,
+
+        // Right
+        12, 13, 14,
+        14, 15, 12,
+
+        // Top
+        16, 17, 18,
+        18, 19, 16,
+
+        // Bottom
+        20, 21, 22,
+        22, 23, 20
     ]
 
     override func viewDidLoad() {
@@ -41,17 +101,24 @@ class L6ViewController: BaseViewController {
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
 
+        glEnable(GLenum(GL_CULL_FACE))
         glClearColor(1, 1, 1, 1)
-        glClear(GLenum(GL_COLOR_BUFFER_BIT))
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT) | GLbitfield(GL_DEPTH_BUFFER_BIT))
 
         effect.prepareToDraw()
 
         // 传入变换矩阵
-        effect.modelMatrix = GLKMatrix4Identity
-        effect.viewMatrix = GLKMatrix4Identity
-        effect.projectionMatrix = GLKMatrix4Identity
+        effect.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(45.0),
+                                                             GLfloat(1),
+                                                             1,
+                                                             100)
 
-        glDrawArrays(GLenum(GL_TRIANGLE_FAN), 0, GLsizei(vertices.count))
+        glDrawElements(
+            GLenum(GL_TRIANGLES),
+            GLsizei(indices.count),
+            GLenum(GL_UNSIGNED_BYTE),
+            nil
+        )
     }
 }
 
@@ -62,29 +129,49 @@ private extension L6ViewController {
         let y: CGFloat = 100
         let width: CGFloat = UIScreen.main.bounds.size.width - 2 * x
         let height: CGFloat = 20
-
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        let slider = UISlider(frame: frame)
-        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
-        view.addSubview(slider)
+        let padding: CGFloat = 20
+        // 分别代表 x,y,z 摄像机
+        for i in 0..<3 {
+            let frame = CGRect(x: x, y: y + CGFloat(i) * (height + padding), width: width, height: height)
+            let slider = UISlider(frame: frame)
+            slider.value = 0.5
+            slider.tag = i + 10000
+            slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+            view.addSubview(slider)
+        }
     }
 
     @objc
     private func sliderValueChanged(_ slider: UISlider) {
-        print(slider.value)
+
+        var tx: Float = 0.0
+        var ty: Float = 0.0
+        var tz: Float = 0.0
+        for i in 0..<3 {
+            let slider = view.viewWithTag(i + 10000) as! UISlider
+            let result = Float((slider.value - 0.5) * 20)
+            if i == 0 {
+                tx = result
+            } else if i == 1 {
+                ty = result
+            } else if i == 2 {
+                tz = result
+            }
+        }
+
+//        effect.viewMatrix = GLKMatrix4MakeLookAt(tx, ty, tz, 0, 0, 0, 0, 1, 0)
+        effect.viewMatrix = GLKMatrix4MakeTranslation(tx, ty, tz)
     }
 
     private func modelMatrix() -> GLKMatrix4 {
         var modelMatrix = GLKMatrix4Identity
-        modelMatrix = GLKMatrix4Translate(modelMatrix, 0.5, -0.5, 0) // 平移
-        modelMatrix = GLKMatrix4Scale(modelMatrix, 0.5, 0.5, 1) // 缩放
         let radians = linearRadians()
-        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0) // 旋转, 沿 Y 轴旋转 45°
+//        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0) // 旋转, 沿 Y 轴旋转
         return modelMatrix
     }
 
     private func linearRadians() -> Float {
-        return sinf(Float(CACurrentMediaTime())/2.0) * Float.pi
+        return Float(CACurrentMediaTime())
     }
 
     private func setupBuffer() {
@@ -96,6 +183,15 @@ private extension L6ViewController {
             GLenum(GL_ARRAY_BUFFER),
             vertices.elementsSize,
             vertices,
+            GLenum(GL_STATIC_DRAW)
+        )
+
+        glGenBuffers(1, &EBO)
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), EBO)
+        glBufferData(
+            GLenum(GL_ELEMENT_ARRAY_BUFFER),
+            indices.elementsSize,
+            indices,
             GLenum(GL_STATIC_DRAW)
         )
     }

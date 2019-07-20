@@ -13,13 +13,13 @@ class L6BaseEffect {
     private var texture: GLuint?
     private var textureUniform: Int32 = 0
 
-    var modelMatrix: GLKMatrix4?
+    var modelMatrix: GLKMatrix4 = GLKMatrix4Identity
     private var modelMatrixUniform: Int32 = 0
 
-    var viewMatrix: GLKMatrix4?
+    var viewMatrix: GLKMatrix4 = GLKMatrix4Identity
     private var viewMatrixUniform: Int32 = 0
 
-    var projectionMatrix: GLKMatrix4?
+    var projectionMatrix: GLKMatrix4 = GLKMatrix4Identity
     private var projectionMatrixUniform: Int32 = 0
 
     private var program: GLuint = 0
@@ -52,16 +52,14 @@ class L6BaseEffect {
 }
 
 private extension L6BaseEffect {
-    private func transfer(matrix: GLKMatrix4?, for uniform: Int32) {
-        if let matrix = matrix {
-            let array = (0..<16).map { matrix[$0] }
-            glUniformMatrix4fv(
-                uniform,
-                1,
-                GLboolean(GL_FALSE),
-                array
-            )
-        }
+    private func transfer(matrix: GLKMatrix4, for uniform: Int32) {
+        let array = (0..<16).map { matrix[$0] }
+        glUniformMatrix4fv(
+            uniform,
+            1,
+            GLboolean(GL_FALSE),
+            array
+        )
     }
 
     private func loadTexture(_ resource: String) -> GLuint? {
