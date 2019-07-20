@@ -1,5 +1,5 @@
 //
-//  L5Vertex.swift
+//  L6Vertex.swift
 //  LearnOpenGL
 //
 //  Created by xurunkang on 2019/7/10.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct L5Vertex {
+struct L6Vertex {
 
     // 顶点坐标
     let position: Position

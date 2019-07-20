@@ -37,6 +37,12 @@
 		2BD2DC6722DCA81200575E47 /* L5Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2DC6022DCA81200575E47 /* L5Vertex.swift */; };
 		2BD2DC6822DCA81200575E47 /* l5vertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2DC6222DCA81200575E47 /* l5vertex.vsh */; };
 		2BD2DC6922DCA81200575E47 /* l5fragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2DC6322DCA81200575E47 /* l5fragment.fsh */; };
+		2BEE99A322E2FB6600C31E74 /* L6Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEE999C22E2FB6600C31E74 /* L6Vertex.swift */; };
+		2BEE99A522E2FB6600C31E74 /* l6vertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE999F22E2FB6600C31E74 /* l6vertex.vsh */; };
+		2BEE99A622E2FB6600C31E74 /* l6fragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE99A022E2FB6600C31E74 /* l6fragment.fsh */; };
+		2BEE99A722E2FB6600C31E74 /* L6BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEE99A122E2FB6600C31E74 /* L6BaseEffect.swift */; };
+		2BEE99A822E2FB6600C31E74 /* L6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEE99A222E2FB6600C31E74 /* L6ViewController.swift */; };
+		2BEE99AA22E2FBF100C31E74 /* L6.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE99A922E2FBF100C31E74 /* L6.png */; };
 		710FA60D22D39A9600B04CCA /* L2_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710FA60C22D39A9600B04CCA /* L2_2ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +79,12 @@
 		2BD2DC6022DCA81200575E47 /* L5Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L5Vertex.swift; sourceTree = "<group>"; };
 		2BD2DC6222DCA81200575E47 /* l5vertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = l5vertex.vsh; sourceTree = "<group>"; };
 		2BD2DC6322DCA81200575E47 /* l5fragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = l5fragment.fsh; sourceTree = "<group>"; };
+		2BEE999C22E2FB6600C31E74 /* L6Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L6Vertex.swift; sourceTree = "<group>"; };
+		2BEE999F22E2FB6600C31E74 /* l6vertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = l6vertex.vsh; sourceTree = "<group>"; };
+		2BEE99A022E2FB6600C31E74 /* l6fragment.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = l6fragment.fsh; sourceTree = "<group>"; };
+		2BEE99A122E2FB6600C31E74 /* L6BaseEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L6BaseEffect.swift; sourceTree = "<group>"; };
+		2BEE99A222E2FB6600C31E74 /* L6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L6ViewController.swift; sourceTree = "<group>"; };
+		2BEE99A922E2FBF100C31E74 /* L6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L6.png; sourceTree = "<group>"; };
 		710FA60C22D39A9600B04CCA /* L2_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L2_2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +138,7 @@
 		2B22E5B922D20BDE0016D666 /* LearnOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				2BEE999B22E2FB4400C31E74 /* Lesson 6 */,
 				2BD2DC5C22DCA81200575E47 /* Lesson 5 */,
 				2B9212DB22D579B6005A410A /* Lesson 4 */,
 				2B9212DA22D5798E005A410A /* Base */,
@@ -222,6 +235,27 @@
 			path = Shader;
 			sourceTree = "<group>";
 		};
+		2BEE999B22E2FB4400C31E74 /* Lesson 6 */ = {
+			isa = PBXGroup;
+			children = (
+				2BEE99A922E2FBF100C31E74 /* L6.png */,
+				2BEE99A122E2FB6600C31E74 /* L6BaseEffect.swift */,
+				2BEE999C22E2FB6600C31E74 /* L6Vertex.swift */,
+				2BEE99A222E2FB6600C31E74 /* L6ViewController.swift */,
+				2BEE999E22E2FB6600C31E74 /* Shader */,
+			);
+			path = "Lesson 6";
+			sourceTree = "<group>";
+		};
+		2BEE999E22E2FB6600C31E74 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				2BEE999F22E2FB6600C31E74 /* l6vertex.vsh */,
+				2BEE99A022E2FB6600C31E74 /* l6fragment.fsh */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
 		710FA60A22D39A4D00B04CCA /* 2-1 Draw A Triangle */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,10 +332,13 @@
 				2B9212E222D57B7C005A410A /* l4vertex.vsh in Resources */,
 				2BD2DC6922DCA81200575E47 /* l5fragment.fsh in Resources */,
 				2BD2DC6822DCA81200575E47 /* l5vertex.vsh in Resources */,
+				2BEE99A522E2FB6600C31E74 /* l6vertex.vsh in Resources */,
 				2B22E5C522D20BE00016D666 /* LaunchScreen.storyboard in Resources */,
+				2BEE99AA22E2FBF100C31E74 /* L6.png in Resources */,
 				2B22E5C222D20BE00016D666 /* Assets.xcassets in Resources */,
 				2B1E579422D31808002777B3 /* l3vertex.vsh in Resources */,
 				2B9212E322D57B7C005A410A /* l4fragment.fsh in Resources */,
+				2BEE99A622E2FB6600C31E74 /* l6fragment.fsh in Resources */,
 				2BD2DC6422DCA81200575E47 /* L5.JPG in Resources */,
 				2B4104B422D59850006A10CE /* L4.JPG in Resources */,
 				2B1E579522D31808002777B3 /* l3fragment.fsh in Resources */,
@@ -317,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				710FA60D22D39A9600B04CCA /* L2_2ViewController.swift in Sources */,
+				2BEE99A822E2FB6600C31E74 /* L6ViewController.swift in Sources */,
 				2B1E579022D316B9002777B3 /* BaseViewController.swift in Sources */,
 				2B5A3DD222D4276500849A57 /* L2_3ViewController.swift in Sources */,
 				2B22E5CE22D20FC50016D666 /* L1ViewController.swift in Sources */,
@@ -326,6 +364,7 @@
 				2BD2DC6722DCA81200575E47 /* L5Vertex.swift in Sources */,
 				2BD2DC6522DCA81200575E47 /* L5BaseEffect.swift in Sources */,
 				2B9212E722D57D14005A410A /* L4Vertex.swift in Sources */,
+				2BEE99A322E2FB6600C31E74 /* L6Vertex.swift in Sources */,
 				2B1E578E22D31693002777B3 /* L2_1ViewController.swift in Sources */,
 				2B1E579922D3244D002777B3 /* Helper.swift in Sources */,
 				2B22E5BB22D20BDE0016D666 /* AppDelegate.swift in Sources */,
@@ -335,6 +374,7 @@
 				2B9212DD22D57AC2005A410A /* L4ViewController.swift in Sources */,
 				2B9212E522D57CFF005A410A /* L4BaseEffect.swift in Sources */,
 				2B9212E922D57DAF005A410A /* VertexAttributes.swift in Sources */,
+				2BEE99A722E2FB6600C31E74 /* L6BaseEffect.swift in Sources */,
 				2B1E579722D31B03002777B3 /* L2Vertex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

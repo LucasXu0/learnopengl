@@ -16,7 +16,8 @@ class MainViewController: UIViewController {
         ("Lesson 2", ["Draw A Triangle By VBO", "Draw A Triangle By EBO", "Draw A Triangle By VAO"]),
         ("Lesson 3", ["Custom Base Effect"]),
         ("Lesson 4", ["Draw A Picture"]),
-        ("Lesson 5", ["Transform"])
+        ("Lesson 5", ["Transform"]),
+        ("Lesson 6", ["Coordinate Systems"])
     ]
 
     private lazy var tableView: UITableView = {
@@ -88,7 +89,8 @@ private extension MainViewController {
             viewController = L4ViewController()
         } else if section == 4 {
             viewController = L5ViewController()
-            
+        } else if section == 5 {
+            viewController = L6ViewController()
         }
 
         return viewController
