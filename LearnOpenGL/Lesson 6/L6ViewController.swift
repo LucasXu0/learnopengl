@@ -8,9 +8,11 @@
 import Foundation
 import GLKit
 
-private let scale = GLfloat(UIScreen.main.bounds.width / UIScreen.main.bounds.height)
+private let scale = GLfloat(UIScreen.main.bounds.width / UIScreen.main.bounds.height) // 屏幕缩放比例
 
 class L6ViewController: BaseViewController {
+
+    private let label = UILabel()
 
     // 注意: effect 的初始化需要在设置 EAGLContext.setCurrent 后
     private lazy var effect: L6BaseEffect = {
@@ -102,16 +104,20 @@ class L6ViewController: BaseViewController {
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
 
         glEnable(GLenum(GL_CULL_FACE))
+        glEnable(GLenum(GL_DEPTH_TEST))
         glClearColor(1, 1, 1, 1)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT) | GLbitfield(GL_DEPTH_BUFFER_BIT))
 
         effect.prepareToDraw()
 
-        // 传入变换矩阵
-        effect.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(45.0),
-                                                             GLfloat(1),
-                                                             1,
-                                                             100)
+        var modelMatrix = GLKMatrix4Identity
+        modelMatrix = GLKMatrix4Scale(modelMatrix, 0.2, 0.2, 0.2) // 缩小 0.2 倍
+        effect.modelMatrix = modelMatrix
+
+//        effect.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(45.0),
+//                                                             GLfloat(1),
+//                                                             0,
+//                                                             100)
 
         glDrawElements(
             GLenum(GL_TRIANGLES),
@@ -130,7 +136,7 @@ private extension L6ViewController {
         let width: CGFloat = UIScreen.main.bounds.size.width - 2 * x
         let height: CGFloat = 20
         let padding: CGFloat = 20
-        // 分别代表 x,y,z 摄像机
+
         for i in 0..<3 {
             let frame = CGRect(x: x, y: y + CGFloat(i) * (height + padding), width: width, height: height)
             let slider = UISlider(frame: frame)
@@ -139,6 +145,9 @@ private extension L6ViewController {
             slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
             view.addSubview(slider)
         }
+
+        label.frame = CGRect.init(x: x, y: UIScreen.main.bounds.size.height - 50, width: width, height: 30)
+        view.addSubview(label)
     }
 
     @objc
@@ -149,7 +158,7 @@ private extension L6ViewController {
         var tz: Float = 0.0
         for i in 0..<3 {
             let slider = view.viewWithTag(i + 10000) as! UISlider
-            let result = Float((slider.value - 0.5) * 20)
+            let result = Float((slider.value - 0.5) * 2)
             if i == 0 {
                 tx = result
             } else if i == 1 {
@@ -159,19 +168,20 @@ private extension L6ViewController {
             }
         }
 
-//        effect.viewMatrix = GLKMatrix4MakeLookAt(tx, ty, tz, 0, 0, 0, 0, 1, 0)
-        effect.viewMatrix = GLKMatrix4MakeTranslation(tx, ty, tz)
+        effect.viewMatrix = GLKMatrix4MakeLookAt(tx, ty, tz, 0, 0, 0, 0, 1, 0)
+
+        label.text = "x: \(tx) y: \(ty), z: \(tz)"
     }
 
     private func modelMatrix() -> GLKMatrix4 {
         var modelMatrix = GLKMatrix4Identity
         let radians = linearRadians()
-//        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0) // 旋转, 沿 Y 轴旋转
+        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0) // 旋转, 沿 Y 轴旋转
         return modelMatrix
     }
 
     private func linearRadians() -> Float {
-        return Float(CACurrentMediaTime())
+        return Float(CACurrentMediaTime() / 3.0)
     }
 
     private func setupBuffer() {
